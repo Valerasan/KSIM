@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<!DOCTYPE search SYSTEM "behaviorsearch.dtd">
+<search>
+    <bsearchVersionNumber>1,10</bsearchVersionNumber>
+    <modelInfo>
+        <modelFile>C:\Users\yarov\Downloads\Segregation Simple Extension 1.nlogox</modelFile>
+        <modelSetupCommands>setup</modelSetupCommands>
+        <modelStepCommands>go</modelStepCommands>
+        <modelStopCondition>percent-unhappy &lt; 50</modelStopCondition>
+        <modelStepLimit>100</modelStepLimit>
+        <modelMetricReporter>percent-unhappy</modelMetricReporter>
+        <modelMeasureIf>true</modelMeasureIf>
+    </modelInfo>
+    <fitnessInfo>
+        <fitnessMinimized>false</fitnessMinimized>
+        <fitnessCollecting>MIN_ACROSS_STEPS</fitnessCollecting>
+        <fitnessSamplingReplications>10</fitnessSamplingReplications>
+        <fitnessCombineReplications>MEAN</fitnessCombineReplications>
+    </fitnessInfo>
+    <searchSpace>
+        <paramSpec>["number" [500 10 2500]]</paramSpec>
+        <paramSpec>["%-similar-wanted" [0 1 100]]</paramSpec>
+        <paramSpec>["number-of-ethnicities" [2 1 5]]</paramSpec>
+    </searchSpace>
+    <searchMethod type="RandomSearch"/>
+    <chromosomeRepresentation type="GrayBinaryChromosome"/>
+    <caching>true</caching>
+    <evaluationLimit>300</evaluationLimit>
+    <bestCheckingNumReplications>10</bestCheckingNumReplications>
+</search>
