@@ -87,6 +87,37 @@ to vanish-turtles
 end
 </pre>
 
+Агент оцінює, наскільки їй добре на поточній ділянці (більше своїх і менше чужих), потім робить один випадковий крок; якщо на новому місці їй стає краще за оцінкою (більше своїх/менше чужих і бажано у великій групі), вона там залишається, а якщо гірше — повертається назад.
+
+<pre>
+to find-new-spot
+  let current-score score-at patch-here
+
+  rt random-float 360
+  fd random-float 10
+
+  if any? other turtles-here [
+    bk random-float 10
+    stop
+  ]
+
+  let new-score score-at patch-here
+
+  if new-score < current-score [
+    bk random-float 10
+  ]
+end
+
+
+to-report score-at [p]
+  
+  let same count turtles in-radius search-radius with [color = [color] of myself]
+  let different count turtles in-radius search-radius with [color != [color] of myself]
+
+  report (same * same-weight) - (different * diff-weight) + (same ^ 2) * group-bonus
+end
+</pre>
+
 ### 4. Графік популяції
 Додано графік **Population**, який відображає чисельність агентів у часі:
 
@@ -96,7 +127,7 @@ end
 Графік оновлюється в кінці кожного tick.
 
 
-![alt text](image.png)
+![alt text](image-2.png)
 
 
 Оцінити, як кількість агентів у просторі впливає на динаміку досягнення стабільності та процент схожості.
@@ -123,25 +154,25 @@ end
     <tr>
       <td>1000</td>
       <td>7</td>
-      <td>99,25</td>
+      <td>100</td>
       <td>560</td>
     </tr>
     <tr>
       <td>1500</td>
       <td>9</td>
-      <td>99,4</td>
+      <td>100</td>
       <td>660</td>
     </tr>
     <tr>
       <td>2000</td>
       <td>8</td>
-      <td>99,74</td>
+      <td>100</td>
       <td>760</td>
     </tr>
     <tr>
       <td>2500</td>
       <td>8</td>
-      <td>99,67</td>
+      <td>100</td>
       <td>890</td>
     </tr>
   </tbody>
@@ -149,4 +180,4 @@ end
 
 Зі збільшенням початкової кількості агентів у моделі спостерігається суттєвий спад їх остаточної кількості. Попри те, що система швидко досягає стабільного стану (7–9 тактів) і характеризується дуже високим рівнем схожості агентів (понад 99%), значна частина агентів зникає в процесі моделювання. Це свідчить про те, що зі зростанням щільності популяції посилюється конкуренція за сприятливе соціальне середовище та вплив соціального тиску, що призводить до витіснення менш адаптованих агентів із системи.
 
-![alt text](image-1.png)
+![alt text](image-3.png)
