@@ -118,6 +118,8 @@ to update-vanish-prob
     ]
 
     set vanish-prob diff-share * foreign-strength
+    set vanish-prob vanish-prob * (1 + social-pressure)
+    set vanish-prob min list vanish-prob 1
   ]
 end
 
@@ -170,6 +172,7 @@ end
         <update>plot count turtles</update>
       </pen>
     </plot>
+    <slider x="365" step="0.1" y="520" max="1" width="195" display="social-pressure" height="54" min="0" direction="Horizontal" default="0.1" variable="social-pressure" units="0.1"></slider>
   </widgets>
   <info><![CDATA[## ACKNOWLEDGMENT
 
